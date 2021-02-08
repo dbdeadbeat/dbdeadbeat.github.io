@@ -1,1 +1,340 @@
-Hello World
+<!doctype html>
+<html>
+	<head>
+				<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script type="text/javascript" src="html2canvas.js"></script>
+  <script type="text/javascript" src="glitch-lib.js"></script>
+  <script type="text/javascript" src="glitch-execute.js"></script>
+  <style>
+	:root {
+	--bg: white;
+	--fg: black;
+	--hi-bg: #f7f7f7;
+	--hi-fg: black;
+	--button-bg: #efefef;
+	--links: blue;
+	--nav-bg: white;
+	--nav-border: lightgray;
+	--border: lightgray;
+	--frost-bg: #f7f7f7b3;
+	--frost-fallback: #f7f7f7f0;
+	--frost-filter: blur(6px);
+	--logo: black;
+}
+@media (prefers-color-scheme: dark) {
+	:root {
+	--bg: #282828;
+	--fg: rgb(110, 132, 136);
+	--hi-bg: #322f3da3;
+	--hi-fg: rgb(110, 132, 136);
+	--input-bg: #3c3836;
+	--button-bg: #504945;
+	--links: #00a598;
+	--nav-bg: #1c1a1a;
+	--nav-border: #423e3e;
+	--border: black;
+	--frost-bg: #1d1b1bb3;
+	--frost-fallback: #1d1b1bf7;
+	--logo: darkgrey;
+	--audio-bg: rgba(140, 140, 140, 0.8);
+}
+  {
+		box-sizing: border-box;
+	}
+	body {
+		font-family: monospace;
+		font-size: 16px;
+		margin: 0;
+		background: var(--bg);
+		color: var(--fg);
+    text-align: center;
+	}
+  hr {
+    border-width: 0px;
+    padding: 10px;
+  }
+	nav {
+		position: -webkit-sticky;
+		position: sticky;
+		font-size: large;
+		width: 100%;
+		background: var(--nav-bg);
+		border-bottom: 1px solid var(--nav-border);
+		padding-top: 8px;
+		padding-left: 8px;
+		padding-right: 8px;
+		padding-bottom: 1px;
+		display: inline-flex;
+		justify-content: space-between;
+	}
+	nav .shortcut {
+		align-self: center;
+		padding-right: 5px;
+	}
+	nav .shortcut a:hover {
+		text-decoration: none;
+	}
+	main > p, main > h2, main > h3, main > div {
+		margin: 8px;
+	}
+	main > form {
+		padding: 0.3em;
+	}
+	main > header {
+		padding-left: 0.3em;
+		padding-right: 0.3em;
+	}
+	nav li {
+		display: inline-block;
+		padding-right: 1em;
+	}
+	nav li.head a, nav li.head a:visited {
+		color: var(--logo);
+	}
+	nav ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+	nav a {
+		display: block;
+	}
+	nav a, nav a:visited, .menu a, .menu a:visited, .navlink {
+		text-decoration: none;
+		color: var(--links);
+	}
+	nav a:hover, .menu a:hover {
+		text-decoration: underline;
+	}
+	a.active {
+		text-decoration: underline;
+		font-weight: bold;
+	}
+	.navlink {
+		text-decoration: underline;
+	}
+	.error-msg {
+		color: var(--error, red);
+	}
+	p.error-msg:empty {
+		display: none;
+	}
+	p a, p a:visited, footer a, footer a:visited {
+		color: var(--links);
+	}
+
+	span.finger {
+		font-size: larger;
+	}
+
+	.frosty {
+		background: var(--frost-fallback);
+	}
+
+	@supports (-webkit-backdrop-filter: blur(2px)) or (backdrop-filter: blur(2px)) {
+		.frosty {
+			background: var(--frost-bg);
+			-webkit-backdrop-filter: blur(var(--frost-blur, 6px));
+			backdrop-filter: blur(var(--frost-blur, 6px));
+		}
+	}
+
+	footer {
+		margin-top: 1em;
+		padding-top: 0.5em;
+		padding-left: 0.5em;
+		border-top: 1px solid var(--nav-border, grey);
+	}
+
+	footer#foot {
+		text-align: right;
+	}
+
+	input[type='text'], input[type='email'], input[type="password"], input[type="file"], input[type="submit"], select {
+		max-width: 100%;
+	}
+
+	@media (hover: none) {
+		input[type="text"], input[type="email"], input[type="password"], input[type="number"], input[type="submit"], input[type="file"], 
+		textarea, select, select:focus {
+			font-size: 16px !important;
+		}
+		form {
+			margin: 0;
+		}
+		form > table {
+			width: 100%;
+			table-layout: fixed;
+		}
+		form > table img {
+			width: 100%;
+			height: auto;
+		}
+	}
+	 
+	@media screen and (max-width: 320px) {
+		nav li {
+			padding-right: 0.2em;
+		}
+	}
+	@media screen and (max-width: 767px) {
+		body {
+			-webkit-text-size-adjust: 100%;
+		}
+		.desktop-only {
+			display: none;
+		}
+		nav li.head {
+			width: 100%;
+		}
+		nav .head a {
+			width: 50%;
+		}
+		.mobile-double {
+			font-size: 190%;
+		}
+	}
+	@media screen and (min-width: 768px) {
+		.mobile-only {
+			display: none;
+		}
+		.mobile-double {
+			font-size: 100%;
+		}
+	}
+  		table {
+			width: 100%;
+			border-spacing: 0;
+		}
+
+		table tr {
+			width: 100%;
+		}
+
+		table tr.quota {
+			font-size: larger;
+			font-weight: bold;
+		}
+
+		table td, table th {
+			padding: 0.5em;
+			text-align: center;
+			width: 30%;
+		}
+
+		table tr > * {
+			border-left: 1px solid var(--nav-border);
+			border-right: 1px solid var(--nav-border);
+		}
+		table tr > :first-child {
+			border-left: none;
+			border-right: none;
+		}
+		table tr > :last-child {
+			border-left: none;
+			border-right: none;
+		}
+
+		table .buy button {
+			width: 100%;
+			max-width: 6em;
+		}
+
+		summary {
+			cursor: pointer;
+			font-weight: bold;
+		}
+		details > p {
+			padding-left: 0.5em;
+		}
+
+		
+		table .buy button {
+			display: none !important;
+		}
+
+.butt {
+  display: inline-block;
+  margin: 0 0.5rem;
+
+  animation: pulse;
+  animation-duration: 3.5s;
+}
+
+div.words {
+  width: 50px;
+  height:50px;
+  background-color: transparent;
+  position:fixed;
+
+}
+
+</style>
+  <title>onlynyans</title>
+	</head>
+	<body>
+    <nav>onlynyans - premium catboi content</nav>
+    <main>
+      <div class="animate__animated butt animate__infinite">
+        <figure id="buttboi">
+          <img src="dumb.png" />
+          <figcaption>u want?</figcaption>
+        </figure>
+      </div>
+      <hr />
+      <h2>
+        becum a Premium Subscriber =^w^=
+      </h2>
+      <hr />
+        <p>
+        </p>
+      <hr />
+      <h3>coming soon...</h3>
+      <div class='words'><h3>$$$$$</h3></div>
+      <hr />
+    </main>
+    <script type="text/javascript">
+      window.onload = function() {
+        var gl = Object.create(glitch_exec);
+        gl.start(document.body);
+
+        var gl1 = Object.create(glitch_exec);
+        gl1.start(document.getElementById("buttboi"));
+
+        animateDiv();
+      }
+
+      function makeNewPosition(){
+        // Get viewport dimensions (remove the dimension of the div)
+        var h = $(window).height() - 50;
+        var w = $(window).width() - 50;
+        var nh = Math.floor(Math.random() * h);
+        var nw = Math.floor(Math.random() * w);
+        return [nh,nw];    
+      }
+
+      function animateDiv(){
+        var newq = makeNewPosition();
+        var oldq = $('.words').offset();
+        var speed = calcSpeed([oldq.top, oldq.left], newq);
+        $('.words').animate({ top: newq[0], left: newq[1] }, speed, function(){
+          animateDiv();        
+        });
+      };
+
+      function calcSpeed(prev, next) {
+        var x = Math.abs(prev[1] - next[1]);
+        var y = Math.abs(prev[0] - next[0]);
+        var greatest = x > y ? x : y;
+        var speedModifier = 0.2;
+        var speed = Math.ceil(greatest/speedModifier);
+        return speed;
+      }
+    </script>
+	</body>
+</html>
